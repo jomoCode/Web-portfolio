@@ -1,10 +1,16 @@
 import React from "react";
 
-const Heading = ({ text }: { text: string }) => {
+type HeadingProps = {
+  text: string;
+  refs?: React.HtmlHTMLAttributes<HTMLHeadingElement>;
+  className?: string;
+};
+
+const Heading = ({ text, refs, className }: HeadingProps) => {
   return (
-    <div>
-      <h1 className="text-2xl font-bold p-5">{text}</h1>
-    </div>
+    <h1 className={`text-2xl font-bold py-5 px-2 ${className}`} {...refs}>
+      {text}
+    </h1>
   );
 };
 
