@@ -1,8 +1,10 @@
 import { CustomButton } from "@/components/button";
+import ContactSection from "@/components/contact_details";
 import { DropDownPicker } from "@/components/drop_down_picker";
 import { Header } from "@/components/header";
 import Heading from "@/components/heading";
-import ProjectItem from "@/components/projectItem";
+import SideBySideSection from "@/components/side_by_side_section";
+import { SwitchTabs } from "@/components/switch_tabs";
 import Title from "@/components/title";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +26,7 @@ export default function Home() {
     <div className="flex flex-col font-sans items-center justify-items-center min-h-screen">
       <Header headerContent={links} />
       <section id="summary">
-        <ProjectItem
+        <SideBySideSection
           left={
             <div className=" p-4 flex flex-col justify-evenly h-full ">
               <div>
@@ -50,17 +52,33 @@ export default function Home() {
         />
       </section>
       <section id="about">
-       
-          <Heading text="About" className="text-center"/>
-          <p className="text-xl text-left px:10 lg:px-20 ">
-            Discover my Freelance React Developer Portfolio, showcasing projects
-            for companies worldwide where I’ve built high-performance web
-            applications, interactive marketing websites, and dynamic data
-            visualizations. Specializing in React, Next.js, and Node.js, I focus
-            on creating seamless user experiences and robust, scalable
-            solutions.
-          </p>
-       
+        <Heading text="About" className="text-center" />
+        <p className="text-xl text-left px:10 lg:px-20 ">
+          Discover my Freelance React Developer Portfolio, showcasing projects
+          for companies worldwide where I’ve built high-performance web
+          applications, interactive marketing websites, and dynamic data
+          visualizations. Specializing in React, Next.js, and Node.js, I focus
+          on creating seamless user experiences and robust, scalable solutions.
+        </p>
+      </section>
+
+      <section>
+        <SwitchTabs
+          tabs={[
+            {
+              content: <div className="w-full bg-amber-400  h-60" />,
+              title: "Skills",
+            },
+            {
+              content: <div className="w-full bg-pink-400 h-60 " />,
+              title: "Code",
+            },
+            {
+              content: <div className="w-full bg-blue-500   h-60 " />,
+              title: "Experience",
+            },
+          ]}
+        />
       </section>
       <section
         id="projects"
@@ -68,16 +86,21 @@ export default function Home() {
       >
         <Heading text={"Projects"} />
 
-        <ProjectItem
+        <SideBySideSection
           left={<div className="bg-red-400 p-4">Left Side Content</div>}
           right={<div className="bg-amber-500 p-4">Right Side Content</div>}
         />
       </section>
+      <section>
+        <ContactSection
+          email="johnjohananmogbolu@gmail.com"
+          github="https://github.com/Jomoartz"
+          linkedin="https://www.linkedin.com/in/mogbolu-johnjohanan/"
+          twitter="https://twitter.com/yourhandle"
+          medium="https://medium.com/@yourhandle"
+        />
+      </section>
 
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start bg-gray-800">
-        {/* HEADER */}
-        <div></div>
-      </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
