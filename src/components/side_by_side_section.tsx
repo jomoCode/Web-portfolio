@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-const ProjectItem = ({
+const  SideBySideSection= ({
   left,
   right,
 }: {
@@ -15,4 +15,4 @@ const ProjectItem = ({
   );
 };
 
-export default ProjectItem;
+export default SideBySideSection;
