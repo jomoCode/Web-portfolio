@@ -1,10 +1,16 @@
+"use client";
 import { CustomButton } from "@/components/button";
 import ContactSection from "@/components/contact_details";
 import { DropDownPicker } from "@/components/drop_down_picker";
 import { Header } from "@/components/header";
 import Heading from "@/components/heading";
+import SkillsSection from "@/components/my_skills";
+import { ProjectInfo } from "@/components/project_components/project_info";
+import { ProjectImage } from "@/components/project_components/projectImage";
 import SideBySideSection from "@/components/side_by_side_section";
 import { SwitchTabs } from "@/components/switch_tabs";
+import CodeSamples from "@/components/SwitchingTabsSection/code_sample";
+import { WorkExperience } from "@/components/SwitchingTabsSection/work_experience";
 import Title from "@/components/title";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,9 +27,15 @@ const links = [
 const description =
   "  Discover my Freelance React Developer Portfolio, showcasing projects for companies worldwide where I’ve built high-performance web applications, interactive marketing websites, and dynamic data visualizations. Specializing in React, Next.js, and Node.js, I focus on creating seamless user experiences and robust, scalable solutions.";
 
-export default function Home() {
+const profileIntroduction = "Hello, I'm Jomo"
+
+const profileSummary = "Full-stack mobile and web developer specializing in JavaScript, React, and Python. I build clean, responsive interfaces with a focus on performance, scalability, and exceptional user experiences"
+
+  export default function Home() {
+  const theme = "dark";
   return (
-    <div className="flex flex-col font-sans items-center justify-items-center min-h-screen">
+    <div className="flex flex-col font-sans items-center justify-items-center min-h-screen pt-20">
+
       <Header headerContent={links} />
       <section id="summary">
         <SideBySideSection
@@ -62,19 +74,19 @@ export default function Home() {
         </p>
       </section>
 
-      <section>
+      <section id="skills">
         <SwitchTabs
           tabs={[
             {
-              content: <div className="w-full bg-amber-400  h-60" />,
+              content: <SkillsSection />,
               title: "Skills",
             },
             {
-              content: <div className="w-full bg-pink-400 h-60 " />,
-              title: "Code",
+              content: <CodeSamples />,
+              title: "Code Samples",
             },
             {
-              content: <div className="w-full bg-blue-500   h-60 " />,
+              content: <WorkExperience />,
               title: "Experience",
             },
           ]}
@@ -87,8 +99,17 @@ export default function Home() {
         <Heading text={"Projects"} />
 
         <SideBySideSection
-          left={<div className="bg-red-400 p-4">Left Side Content</div>}
-          right={<div className="bg-amber-500 p-4">Right Side Content</div>}
+          left={
+            <ProjectImage src="/images/myproject.png" alt="Ecommerce Website" />
+          }
+          right={
+            <ProjectInfo
+              title="Ecommerce Website"
+              description="A fully responsive online store with product listings, cart functionality, checkout, and an admin dashboard."
+              tech={["Next.js", "Tailwind CSS", "Node.js", "MongoDB"]}
+              liveLink="https://myprojectlive.com"
+            />
+          }
         />
       </section>
       <section>
