@@ -19,14 +19,15 @@ type SectionProps = {
   name: string;
 } & VariantProps<typeof SectionStyles>;
 
-
 const Section = ({ children, name, variant }: SectionProps) => {
-  const {theme, toggleTheme} = useTheme();
+  const { theme } = useTheme();
   return (
     <section
       aria-label={`${name} section`}
       id="section"
-      className={`${SectionStyles({ variant: variant })} ${theme === "dark" ? "bg-background_dark1" : "bg-background" }`}
+      className={`${SectionStyles({ variant: variant })} ${
+        theme === "dark" ? "bg-background-dark-1" : "bg-background-light-1"
+      }`}
     >
       {children}
     </section>

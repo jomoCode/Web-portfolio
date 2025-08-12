@@ -12,18 +12,18 @@ import SideBySideSection from "@/components/side_by_side_section";
 import { SwitchTabs } from "@/components/switch_tabs";
 import CodeSamples from "@/components/SwitchingTabsSection/code_sample";
 import { WorkExperience } from "@/components/SwitchingTabsSection/work_experience";
-import { Text, Title } from "@/components/title";
+import { ThemeToggleButton } from "@/components/theme_toggle_button";
+import { Text, ThemedLink, Title } from "@/components/text";
 import { useTheme } from "@/context/theme_context";
 
-import Link from "next/link";
 const links = [
-  <Link href={"#"}>About</Link>,
+  <ThemedLink href="#">About</ThemedLink>,
   <DropDownPicker title="Work" />,
-  <Link href={"#"}>Services</Link>,
-  <Link href={"#"}>Testimonials</Link>,
-  <Link href={"#"}>Experience</Link>,
-  <Link href={"#"}>Blog</Link>,
-  <Link href={"#"}>Contact</Link>,
+  <ThemedLink href="#">Services</ThemedLink>,
+  <ThemedLink href="#">Testimonials</ThemedLink>,
+  <ThemedLink href="#">Experience</ThemedLink>,
+  <ThemedLink href="#">Blog</ThemedLink>,
+  <ThemedLink href="#">Contact</ThemedLink>,
 ];
 
 const description = () => (
@@ -69,21 +69,24 @@ const profileSummary =
   "Full-stack mobile and web developer specializing in JavaScript, React, and Python. I build clean, responsive interfaces with a focus on performance, scalability, and exceptional user experiences";
 
 const Home = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   return (
     <div
-      className={`flex flex-col font-sans items-center justify-items-center min-h-screen pt-20 ${
-        theme === "dark" ? "bg-gray-800" : "bg-white"
+      className={`relative flex flex-col font-sans items-center justify-items-center min-h-screen pt-20 ${
+        theme === "dark" ? "bg-background-dark-1" : "bg-background-light-1"
       } `}
     >
+      <div className="fixed top-8 right-[5]">
+        <ThemeToggleButton />
+      </div>
       <Header headerContent={links} />
       <Section name="summary">
         <SideBySideSection
           left={
-            <div className=" p-4 flex flex-col justify-evenly h-full ">
+            <div className=" p-4 flex flex-col justify-evenly h-full">
               <div>
-                <Title text={profileIntroduction} className="text-left p-0" />
-                <p className="text-2xl text-left py-3">{profileSummary}</p>
+                <Title text={profileIntroduction} />
+                <Text>{profileSummary}</Text>
               </div>
 
               <CustomButton>Find Out More</CustomButton>
@@ -99,7 +102,7 @@ const Home = () => {
                 />
               ) : (
                 <img
-                  src="/public/bright_mode_profile_Image.png"
+                  src="/bright_mode_profile_image.png"
                   alt="profile image of jomoCode"
                   className="w-full max-h-[450px] rounded object-contain"
                 />
@@ -110,9 +113,7 @@ const Home = () => {
       </Section>
       <Section name="about">
         <Heading text="About" className="text-center" />
-        <Text className="text-xl text-left px:10 lg:px-20 ">
-          {description()}
-        </Text>
+        {description()}
       </Section>
 
       <Section name="skills">

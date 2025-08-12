@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { FaGithub, FaLinkedin, FaTwitter, FaMedium } from "react-icons/fa";
-import { Title } from "./title";
+import { Title } from "./text";
 import { CustomButton } from "./button";
+import { useTheme } from "@/context/theme_context";
+import Heading from "./heading";
 
 interface ContactSectionProps {
   email: string;
@@ -20,6 +22,7 @@ export default function ContactSection({
   medium,
 }: ContactSectionProps) {
   const [form, setForm] = useState({ name: "", email: "", project: "" });
+  const { theme } = useTheme();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,13 +39,15 @@ export default function ContactSection({
   const mailtoLink = `mailto:${email}?subject=I need your service&body=Hello, I need your service for...`;
 
   return (
-    <div>
-      <Title text="Contact Me" />
-  
+    <div className="w-full">
+      <Heading text="Contact Me"  />
+
       {/* Contact Form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full py-10 rounded-lg shadow-md space-y-4 bg-background-dark-1"
+        className={`w-full p-5 rounded-lg shadow-md space-y-4 ${
+          theme === "dark" ? "bg-background-dark-2" : "bg-background-light-2"
+        }`}
       >
         <input
           type="text"
@@ -51,7 +56,9 @@ export default function ContactSection({
           value={form.name}
           onChange={handleChange}
           required
-          className="w-full border border-gray-300 rounded p-3"
+          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
+            theme === "dark" ? "text-text-text-light" : "text-text-light"
+          } `}
         />
         <input
           type="email"
@@ -60,7 +67,9 @@ export default function ContactSection({
           value={form.email}
           onChange={handleChange}
           required
-          className="w-full border border-gray-300 rounded p-3"
+          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
+            theme === "dark" ? "text-text-text-light" : "text-text-light"
+          } `}
         />
         <textarea
           name="project"
@@ -68,19 +77,29 @@ export default function ContactSection({
           value={form.project}
           onChange={handleChange}
           required
-          className="w-full border border-gray-300 rounded p-3 h-32"
+          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
+            theme === "dark" ? "text-text-text-light" : "text-text-light"
+          } `}
         />
+        <div className={"px-15"}>
         <CustomButton
           type="submit"
-          className=" rounded-full font-semibold transition w-full"
+          className={` rounded-full font-semibold transition w-full py-0 mb-2 ${
+            theme === "dark" ? "bg-blue-900" : "bg-blue-500"
+          }`}
         >
           Send Message
         </CustomButton>
+        <CustomButton
+          className={` rounded-full font-semibold transition w-full py-0 ${
+            theme === "dark" ? "bg-blue-900" : "bg-blue-400"
+          }`}
+        >
+          <a href={mailtoLink}>Email Me</a>
+        </CustomButton></div>
       </form>
-      <CustomButton><a href={mailtoLink}>Email Me</a></CustomButton>
 
-
-       <div className="flex justify-center gap-6 text-2xl py-20">
+      <div className="flex justify-center gap-6 text-2xl py-20">
         <a
           href={github}
           target="_blank"
