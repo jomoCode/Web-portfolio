@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { FaGithub, FaLinkedin, FaTwitter, FaMedium } from "react-icons/fa";
+import { Title } from "./title";
+import { CustomButton } from "./button";
 
 interface ContactSectionProps {
   email: string;
@@ -19,7 +21,9 @@ export default function ContactSection({
 }: ContactSectionProps) {
   const [form, setForm] = useState({ name: "", email: "", project: "" });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -32,39 +36,13 @@ export default function ContactSection({
   const mailtoLink = `mailto:${email}?subject=I need your service&body=Hello, I need your service for...`;
 
   return (
-    <section className="bg-gray-50 py-12 px-4 rounded-xl shadow-md">
-      <h2 className="text-3xl font-bold text-center mb-6">Contact Me</h2>
-
-      {/* Email CTA */}
-      <div className="text-center mb-8">
-        <a
-          href={mailtoLink}
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition"
-        >
-          📧 Email Me
-        </a>
-      </div>
-
-      {/* Social Links */}
-      <div className="flex justify-center gap-6 text-2xl mb-10">
-        <a href={github} target="_blank" rel="noopener noreferrer" className="hover:text-gray-700">
-          <FaGithub />
-        </a>
-        <a href={linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">
-          <FaLinkedin />
-        </a>
-        <a href={twitter} target="_blank" rel="noopener noreferrer" className="hover:text-sky-500">
-          <FaTwitter />
-        </a>
-        <a href={medium} target="_blank" rel="noopener noreferrer" className="hover:text-black">
-          <FaMedium />
-        </a>
-      </div>
-
+    <div>
+      <Title text="Contact Me" />
+  
       {/* Contact Form */}
       <form
         onSubmit={handleSubmit}
-        className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+        className="w-full py-10 rounded-lg shadow-md space-y-4 bg-background-dark-1"
       >
         <input
           type="text"
@@ -92,13 +70,50 @@ export default function ContactSection({
           required
           className="w-full border border-gray-300 rounded p-3 h-32"
         />
-        <button
+        <CustomButton
           type="submit"
-          className="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition w-full"
+          className=" rounded-full font-semibold transition w-full"
         >
           Send Message
-        </button>
+        </CustomButton>
       </form>
-    </section>
+      <CustomButton><a href={mailtoLink}>Email Me</a></CustomButton>
+
+
+       <div className="flex justify-center gap-6 text-2xl py-20">
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-gray-700"
+        >
+          <FaGithub />
+        </a>
+        <a
+          href={linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-600"
+        >
+          <FaLinkedin />
+        </a>
+        <a
+          href={twitter}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-sky-500"
+        >
+          <FaTwitter />
+        </a>
+        <a
+          href={medium}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-black"
+        >
+          <FaMedium />
+        </a>
+      </div>
+    </div>
   );
 }
