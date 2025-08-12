@@ -1,15 +1,16 @@
-'use client'
+"use client";
+
 import { useTheme } from "@/context/theme_context";
 import { cva } from "class-variance-authority";
-import React, { ReactNode, forwardRef} from "react";
+import React, { ReactNode, forwardRef } from "react";
 
 const headerStyles = cva(
-  "hidden w-[80%] min-h-16 lg:block lg:absolute lg:top-3 p-8 rounded-lg drop-shadow-lg shadow-white",
+  "hidden w-[80%] min-h-16 lg:block lg:absolute lg:top-3 p-8 rounded-lg drop-shadow-lg shadow-white relative",
   {
     variants: {
       theme: {
-        light: "bg-white text-gray-900",
-        dark: "bg-gray-900 text-white",
+        light: "bg-background-light-2 text-light",
+        dark: "bg-background-dark-2 text-dark",
       },
     },
     defaultVariants: {
@@ -18,17 +19,19 @@ const headerStyles = cva(
   }
 );
 
-type HeaderContainerProps = { children: ReactNode;};
+type HeaderContainerProps = { children: ReactNode };
 
 const HeaderContainer = forwardRef<HTMLElement, HeaderContainerProps>(
-  ({ children }, ref) =>{ 
-    const{ theme, toggleTheme} = useTheme();
+  ({ children }, ref) => {
+    const { theme } = useTheme();
     return (
-    <header ref={ref} className={headerStyles({ theme })}>
-      {children}
-    </header>
-  )}
+      <header ref={ref} className={headerStyles({ theme})}>
+        {children}
+      </header>
+    );
+  }
 );
+
 HeaderContainer.displayName = "HeaderContainer";
 
 export { HeaderContainer };

@@ -1,4 +1,5 @@
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { Text, Title } from "../text";
 
 interface ProjectInfoProps {
   title: string;
@@ -15,11 +16,8 @@ export const ProjectInfo = ({
 }: ProjectInfoProps) => {
   return (
     <div>
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-        {title}
-      </h2>
-      <p className="text-gray-700 dark:text-gray-300 mb-4">{description}</p>
-
+      <Title text={title} />
+      <Text>{description}</Text>
       {/* Tech Stack */}
       <div className="flex flex-wrap gap-2 mb-6">
         {tech.map((item) => (

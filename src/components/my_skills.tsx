@@ -1,5 +1,6 @@
 // components/SkillsSection.tsx
 import { motion } from "framer-motion";
+import { Title } from "./text";
 
 const skills = [
   "HTML",
@@ -25,9 +26,7 @@ export default function SkillsSection() {
     <section className="w-full py-16 light:bg-white bg-gray-900">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center light:text-gray-900text-white mb-12">
-          My Skills
-        </h2>
+        <Title text="My Skills" />
 
         {/* Skills Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">

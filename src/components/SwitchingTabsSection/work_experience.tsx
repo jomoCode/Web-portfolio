@@ -1,5 +1,6 @@
 // components/WorkExperience.tsx
 import { motion } from "framer-motion";
+import { Text, Title } from "../text";
 
 const experiences = [
   {
@@ -24,9 +25,7 @@ const WorkExperience = () => {
     <section className="w-full py-16 bg-white dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
-          Work Experience
-        </h2>
+        <Title text="Work Experience" />
 
         {/* Experience Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -45,9 +44,7 @@ const WorkExperience = () => {
               </h3>
 
               {/* Duration */}
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                {exp.duration}
-              </p>
+              <Text>{exp.duration}</Text>
 
               {/* Tech Stack */}
               <div className="flex flex-wrap gap-2">

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
+import { Text, Title } from "../text";
 
 const projects = [
   {
@@ -30,10 +31,8 @@ export default function CodeSamples() {
     <section className="w-full py-16 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
-          Code Samples
-        </h2>
 
+        <Title text="Code Samples" />
         {/* Projects Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
@@ -67,9 +66,7 @@ export default function CodeSamples() {
               </div>
 
               {/* Description */}
-              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                {project.description}
-              </p>
+              <Text>{project.description}</Text>
             </motion.a>
           ))}
         </div>
