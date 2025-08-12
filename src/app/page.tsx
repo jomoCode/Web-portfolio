@@ -7,12 +7,14 @@ import Heading from "@/components/heading";
 import SkillsSection from "@/components/my_skills";
 import { ProjectInfo } from "@/components/project_components/project_info";
 import { ProjectImage } from "@/components/project_components/projectImage";
+import { Section } from "@/components/section";
 import SideBySideSection from "@/components/side_by_side_section";
 import { SwitchTabs } from "@/components/switch_tabs";
 import CodeSamples from "@/components/SwitchingTabsSection/code_sample";
 import { WorkExperience } from "@/components/SwitchingTabsSection/work_experience";
-import Title from "@/components/title";
-import Image from "next/image";
+import { Text, Title } from "@/components/title";
+import { useTheme } from "@/context/theme_context";
+
 import Link from "next/link";
 const links = [
   <Link href={"#"}>About</Link>,
@@ -24,29 +26,64 @@ const links = [
   <Link href={"#"}>Contact</Link>,
 ];
 
-const description =
-  "  Discover my Freelance React Developer Portfolio, showcasing projects for companies worldwide where I’ve built high-performance web applications, interactive marketing websites, and dynamic data visualizations. Specializing in React, Next.js, and Node.js, I focus on creating seamless user experiences and robust, scalable solutions.";
+const description = () => (
+  <Text>
+    <Text className="text-justify">
+      I’m JomoCode — a full-stack web and mobile developer.
+    </Text>
 
-const profileIntroduction = "Hello, I'm Jomo"
+    <Text className="text-justify">
+      I specialize in crafting responsive front-ends and robust back-end
+      systems. I’ve delivered ecommerce platforms, mobile applications,
+      content-driven websites, and real-time notification systems — all with
+      clean, maintainable code optimized for performance.
+    </Text>
 
-const profileSummary = "Full-stack mobile and web developer specializing in JavaScript, React, and Python. I build clean, responsive interfaces with a focus on performance, scalability, and exceptional user experiences"
+    <Text className="text-justify">
+      From planning to deployment, I keep clients fully in the loop with
+      organized workflows in Trello, Slack, GitHub, and Confluence, ensuring
+      progress is transparent and collaboration is seamless.
+    </Text>
 
-  export default function Home() {
-  const theme = "dark";
+    <Text>I Offer</Text>
+
+    <ul>
+      <li>A tested, working project delivered within the agreed timeframe.</li>
+      <li>
+        Adaptable, well-documented code with testing flows for smooth handovers,
+        refactors, and updates.
+      </li>
+      <li>Clear communication and regular updates at every stage.</li>
+    </ul>
+
+    <Text>
+      Simply put: I design, build, and deliver — taking your project from first
+      brainstorm to final launch with precision and professionalism.
+    </Text>
+  </Text>
+);
+
+const profileIntroduction = "Hello, I'm Jomo";
+
+const profileSummary =
+  "Full-stack mobile and web developer specializing in JavaScript, React, and Python. I build clean, responsive interfaces with a focus on performance, scalability, and exceptional user experiences";
+
+const Home = () => {
+  const { theme, toggleTheme } = useTheme();
   return (
-    <div className="flex flex-col font-sans items-center justify-items-center min-h-screen pt-20">
-
+    <div
+      className={`flex flex-col font-sans items-center justify-items-center min-h-screen pt-20 ${
+        theme === "dark" ? "bg-gray-800" : "bg-white"
+      } `}
+    >
       <Header headerContent={links} />
-      <section id="summary">
+      <Section name="summary">
         <SideBySideSection
           left={
             <div className=" p-4 flex flex-col justify-evenly h-full ">
               <div>
-                <Title text="Call me Jomo" className="text-left p-0" />
-                <p className="text-3xl text-left py-3">
-                  I'm a full stack developer specializing in building web
-                  applications using JavaScript, React and Node.js
-                </p>
+                <Title text={profileIntroduction} className="text-left p-0" />
+                <p className="text-2xl text-left py-3">{profileSummary}</p>
               </div>
 
               <CustomButton>Find Out More</CustomButton>
@@ -54,27 +91,31 @@ const profileSummary = "Full-stack mobile and web developer specializing in Java
           }
           right={
             <div className=" p-4">
-              <img
-                src="https://andrejgajdos.com/wp-content/uploads/2021/05/andrej-gajdos-1.webp"
-                alt="Andrej Gajdos"
-                className="w-full max-h-[450px] rounded object-contain"
-              />
+              {theme === "dark" ? (
+                <img
+                  src="/dark_mode_profile_Image.png"
+                  alt="Profile image of JomoCode"
+                  className="w-full max-h-[450px] rounded object-contain"
+                />
+              ) : (
+                <img
+                  src="/public/bright_mode_profile_Image.png"
+                  alt="profile image of jomoCode"
+                  className="w-full max-h-[450px] rounded object-contain"
+                />
+              )}
             </div>
           }
         />
-      </section>
-      <section id="about">
+      </Section>
+      <Section name="about">
         <Heading text="About" className="text-center" />
-        <p className="text-xl text-left px:10 lg:px-20 ">
-          Discover my Freelance React Developer Portfolio, showcasing projects
-          for companies worldwide where I’ve built high-performance web
-          applications, interactive marketing websites, and dynamic data
-          visualizations. Specializing in React, Next.js, and Node.js, I focus
-          on creating seamless user experiences and robust, scalable solutions.
-        </p>
-      </section>
+        <Text className="text-xl text-left px:10 lg:px-20 ">
+          {description()}
+        </Text>
+      </Section>
 
-      <section id="skills">
+      <Section name="skills">
         <SwitchTabs
           tabs={[
             {
@@ -91,17 +132,12 @@ const profileSummary = "Full-stack mobile and web developer specializing in Java
             },
           ]}
         />
-      </section>
-      <section
-        id="projects"
-        className="flex flex-col items-center justify-center text-center"
-      >
+      </Section>
+      <Section name="projects">
         <Heading text={"Projects"} />
 
         <SideBySideSection
-          left={
-            <ProjectImage src="/images/myproject.png" alt="Ecommerce Website" />
-          }
+          left={<ProjectImage src="/ecommerce.webp" alt="Ecommerce Website" />}
           right={
             <ProjectInfo
               title="Ecommerce Website"
@@ -111,8 +147,9 @@ const profileSummary = "Full-stack mobile and web developer specializing in Java
             />
           }
         />
-      </section>
-      <section>
+      </Section>
+
+      <Section name="contact">
         <ContactSection
           email="johnjohananmogbolu@gmail.com"
           github="https://github.com/Jomoartz"
@@ -120,55 +157,8 @@ const profileSummary = "Full-stack mobile and web developer specializing in Java
           twitter="https://twitter.com/yourhandle"
           medium="https://medium.com/@yourhandle"
         />
-      </section>
-
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </Section>
     </div>
   );
-}
+};
+export default Home;
