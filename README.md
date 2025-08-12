@@ -38,7 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 TODO:
 
 - update global css to work with light and dark mode.
-- theme_state should check for preffered system theme and set it as the default theme untill state loads.
+- theme has a default dark mode untill states loads
 - all texts should be custom components.
 - all ui elements should directly consume theme context
 - upate the font.
