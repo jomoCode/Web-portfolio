@@ -7,7 +7,7 @@ interface ProjectImageProps {
 
 export const ProjectImage = ({ src, alt }: ProjectImageProps) => {
   return (
-    <div className="overflow-hidden rounded-xl shadow-lg w-[500px] h-[500px]">
+    <div className="overflow-hidden shadow-lg w-[500px] h-[500px]">
       <Image
         src={src}
         alt={alt}
