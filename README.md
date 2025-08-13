@@ -42,3 +42,5 @@ TODO:
 - all texts should be custom components.
 - all ui elements should directly consume theme context
 - upate the font.
+- buttons run too far when you click em
+- align summary

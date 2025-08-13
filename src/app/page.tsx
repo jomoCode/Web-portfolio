@@ -44,11 +44,13 @@ const description = () => (
       organized workflows in Trello, Slack, GitHub, and Confluence, ensuring
       progress is transparent and collaboration is seamless.
     </Text>
+    <span className="m-5" />
 
-    <Text>I Offer</Text>
-
-    <ul>
-      <li>A tested, working project delivered within the agreed timeframe.</li>
+    <ul className="text-justify pl-5">
+      <li>
+        I offer, a tested, working project delivered within the agreed
+        timeframe.
+      </li>
       <li>
         Adaptable, well-documented code with testing flows for smooth handovers,
         refactors, and updates.
@@ -56,7 +58,8 @@ const description = () => (
       <li>Clear communication and regular updates at every stage.</li>
     </ul>
 
-    <Text>
+    <span className="m-5" />
+    <Text className="text-justify">
       Simply put: I design, build, and deliver — taking your project from first
       brainstorm to final launch with precision and professionalism.
     </Text>
