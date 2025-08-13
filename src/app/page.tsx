@@ -157,6 +157,17 @@ const Home = () => {
             />
           }
         />
+        <SideBySideSection
+          left={<ProjectImage src="/ecommerce.webp" alt="Ecommerce Website" />}
+          right={
+            <ProjectInfo
+              title="Ecommerce Website"
+              description="A fully responsive online store with product listings, cart functionality, checkout, and an admin dashboard."
+              tech={["Next.js", "Tailwind CSS", "Node.js", "MongoDB"]}
+              liveLink="https://myprojectlive.com"
+            />
+          }
+        />
       </Section>
 
       <Section name="contact">
