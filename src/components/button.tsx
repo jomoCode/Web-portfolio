@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 import React from "react";
 
 const customButtonStyles = cva(
-  " flex items-center justify-center px-4 py-4  transition-transform duration-300 ease-in-out hover:scale-80 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-full",
+  " flex items-center justify-center px-4 py-4  transition-transform duration-300 ease-in-out hover:scale-95 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-full",
   {
     variants: {
       theme: {

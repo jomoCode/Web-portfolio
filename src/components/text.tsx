@@ -27,7 +27,7 @@ interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
 const Text = ({ text, children, className = "", ...rest }: TextProps) => {
  const {theme} = useTheme();
   return (
-    <div>
+    <div className="w-full">
       <p className={`text-xl ${className}   ${theme === "dark"? "text-text-dark":"text-text-light" }`} {...rest}>
         {children}
       </p>

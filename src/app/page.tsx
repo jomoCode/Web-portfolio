@@ -83,6 +83,8 @@ const Home = () => {
         <ThemeToggleButton />
       </div>
       <Header headerContent={links} />
+
+      {/* SUMMARY */}
       <Section name="summary">
         <SideBySideSection
           left={
@@ -114,11 +116,14 @@ const Home = () => {
           }
         />
       </Section>
+
+      {/* ABOUT */}
       <Section name="about">
         <Heading text="About" className="text-center" />
         {description()}
       </Section>
 
+      {/* SKILLS AND EXPERIENCE */}
       <Section name="skills">
         <SwitchTabs
           tabs={[
@@ -140,6 +145,7 @@ const Home = () => {
       <Section name="projects">
         <Heading text={"Projects"} />
 
+        {/* PROJECT */}
         <SideBySideSection
           left={<ProjectImage src="/ecommerce.webp" alt="Ecommerce Website" />}
           right={
