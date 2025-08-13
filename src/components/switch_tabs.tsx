@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "@/context/theme_context";
 import { useState, ReactNode } from "react";
 
 type Tab = {
@@ -12,6 +13,7 @@ type TabsProps = {
 
 export const SwitchTabs = ({ tabs }: TabsProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { theme } = useTheme();
 
   return (
     <div className="w-full">
@@ -23,8 +25,16 @@ export const SwitchTabs = ({ tabs }: TabsProps) => {
             className={`px-4 py-2 text-2xl font-bold transition-colors duration-200
               ${
                 activeIndex === index
-                  ? "border-b-2 border-blue-500 text-blue-600"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? `${
+                      theme === "dark"
+                        ? "border-b-text-dark text-text-dark  hover:text-gray-400"
+                        : "border-b-background-light-2 text-black hover:text-gray-800"
+                    } border-b-2`
+                  : `${
+                      theme === "dark"
+                        ? "border-b-text-dark text-gray-400 hover:text-gray-500"
+                        : "border-b-background-light-2 text-gray-700 hover:text-gray-500"
+                    } border-b-2` 
               }`}
           >
             {tab.title}
