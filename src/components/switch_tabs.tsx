@@ -22,7 +22,7 @@ export const SwitchTabs = ({ tabs }: TabsProps) => {
           <button
             key={tab.title}
             onClick={() => setActiveIndex(index)}
-            className={`px-4 py-2 text-2xl font-bold transition-colors duration-200
+            className={`px-4 py-2 md:text-2xl text-lg font-bold transition-colors duration-200
               ${
                 activeIndex === index
                   ? `${
