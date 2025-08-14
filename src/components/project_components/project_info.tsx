@@ -19,7 +19,7 @@ export const ProjectInfo = ({
   const { theme } = useTheme();
   return (
     <div>
-      <Text className="text-left py-2">{title}</Text>
+      <Text className="text-center py-2">{title}</Text>
       <Text className="text-left py-2">{description}</Text>
       <div className="flex flex-wrap gap-2 my-6">
         {tech.map((item) => (
