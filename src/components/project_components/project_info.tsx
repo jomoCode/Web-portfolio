@@ -1,5 +1,4 @@
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { Text, Title } from "../text";
+import { Text } from "../text";
 import { CustomButton } from "../button";
 import { useTheme } from "@/context/theme_context";
 
@@ -25,7 +24,13 @@ export const ProjectInfo = ({
         {tech.map((item) => (
           <span
             key={item}
-            className={`px-2 py-2 text-sm rounded-full ${theme ==="dark"? "bg-background-dark-2":"bg-background-light-2"}  ${theme === "dark" ? "text-text-dark" : "text-text-light"} text-center`}
+            className={`px-2 py-2 text-sm rounded-full ${
+              theme === "dark"
+                ? "bg-background-dark-2"
+                : "bg-background-light-2"
+            }  ${
+              theme === "dark" ? "text-text-dark" : "text-text-light"
+            } text-center`}
           >
             {item}
           </span>

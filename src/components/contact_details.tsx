@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { FaGithub, FaLinkedin, FaTwitter, FaMedium } from "react-icons/fa";
-import { Title } from "./text";
 import { CustomButton } from "./button";
 import { useTheme } from "@/context/theme_context";
 import Heading from "./heading";

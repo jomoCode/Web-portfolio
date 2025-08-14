@@ -27,7 +27,7 @@ interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
   childen?: string | ReactNode;
 }
 
-const Text = ({ text, children, className = "", ...rest }: TextProps) => {
+const Text = ({ children, className = "", ...rest }: TextProps) => {
   const { theme } = useTheme();
   return (
     <p

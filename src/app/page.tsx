@@ -15,6 +15,7 @@ import { WorkExperience } from "@/components/SwitchingTabsSection/work_experienc
 import { ThemeToggleButton } from "@/components/theme_toggle_button";
 import { Text, ThemedLink, Title } from "@/components/text";
 import { useTheme } from "@/context/theme_context";
+import Image from "next/image";
 
 const links = [
   <ThemedLink key='about' href="about">About</ThemedLink>,
@@ -105,13 +106,13 @@ const Home = () => {
           right={
             <div className=" p-4">
               {theme === "dark" ? (
-                <img
+                <Image
                   src="/dark_mode_profile_Image.png"
                   alt="Profile image of JomoCode"
                   className="w-full max-h-[450px] rounded object-contain"
                 />
               ) : (
-                <img
+                <Image
                   src="/bright_mode_profile_image.png"
                   alt="profile image of jomoCode"
                   className="w-full max-h-[450px] rounded object-contain"
