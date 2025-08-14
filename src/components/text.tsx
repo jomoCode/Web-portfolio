@@ -9,33 +9,37 @@ interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 const Title = ({ text, className = "", ...rest }: TitleProps) => {
-  const {theme} = useTheme();
+  const { theme } = useTheme();
   return (
-    <div>
-      <h2 className={`text-xl ${className}, ${theme === "dark"? "text-text-dark":"text-text-light" }`} {...rest}>
-        {text}
-      </h2>
-    </div>
+    <h2
+      className={`text-xl ${className}, ${
+        theme === "dark" ? "text-text-dark" : "text-text-light"
+      }`}
+      {...rest}
+    >
+      {text}
+    </h2>
   );
 };
 
 interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  text?: string|ReactNode;
-  childen?: string|ReactNode;
+  text?: string | ReactNode;
+  childen?: string | ReactNode;
 }
 
 const Text = ({ text, children, className = "", ...rest }: TextProps) => {
- const {theme} = useTheme();
+  const { theme } = useTheme();
   return (
-    <div className="w-full">
-      <p className={`text-xl ${className}   ${theme === "dark"? "text-text-dark":"text-text-light" }`} {...rest}>
-        {children}
-      </p>
-    </div>
+    <p
+      className={`text-xl w-full ${className}   ${
+        theme === "dark" ? "text-text-dark" : "text-text-light"
+      }`}
+      {...rest}
+    >
+      {children}
+    </p>
   );
 };
-
-
 
 type ThemedLinkProps = {
   href: string;
@@ -63,6 +67,5 @@ const ThemedLink = ({
     </Link>
   );
 };
-
 
 export { Text, Title, ThemedLink };
