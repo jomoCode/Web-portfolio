@@ -85,13 +85,13 @@ const Home = () => {
       <Header headerContent={links} />
 
       {/* SUMMARY */}
-      <Section name="summary">
+      <Section name="summary" className="pb-0">
         <SideBySideSection
           left={
             <div className=" p-4 flex flex-col justify-evenly h-full">
-              <div>
-                <Title text={profileIntroduction} />
-                <Text>{profileSummary}</Text>
+              <div className="w-full text-left">
+                <Title text={profileIntroduction} className="text-left py-2" />
+                <Text className="text-left mb-10">{profileSummary}</Text>
               </div>
 
               <CustomButton>Find Out More</CustomButton>
@@ -118,19 +118,22 @@ const Home = () => {
       </Section>
 
       {/* ABOUT */}
-      <Section name="about">
-        <Heading text="About" className="text-center" />
-        {description()}
-      </Section>
+      <div className="w-full h-[500px] mb-24 relative">
+        <Section
+          name="about"
+          bg_dark="bg-background-dark-2"
+          bg_light="bg-background-light-2"
+          className="absolute  top-[-60px] left-0 pt-20 px-40 w-full"
+        >
+          <Heading text="About" className="text-center" />
+          {description()}
+        </Section>
+      </div>
 
       {/* SKILLS AND EXPERIENCE */}
       <Section name="skills">
         <SwitchTabs
           tabs={[
-            {
-              content: <SkillsSection />,
-              title: "Skills",
-            },
             {
               content: <CodeSamples />,
               title: "Code Samples",
@@ -138,6 +141,10 @@ const Home = () => {
             {
               content: <WorkExperience />,
               title: "Experience",
+            },
+            {
+              content: <SkillsSection />,
+              title: "Skills",
             },
           ]}
         />
