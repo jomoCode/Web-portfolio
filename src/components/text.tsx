@@ -68,4 +68,24 @@ const ThemedLink = ({
   );
 };
 
-export { Text, Title, ThemedLink };
+
+interface TextContainerProps extends React.HTMLAttributes<HTMLSpanElement> {
+  text?: string | ReactNode;
+  childen?: string | ReactNode;
+}
+
+const TextContainer = ({ children, className = "", ...rest }: TextContainerProps) => {
+  const { theme } = useTheme();
+  return (
+    <span
+      className={`text-xl w-full ${className}   ${
+        theme === "dark" ? "text-text-dark" : "text-text-light"
+      }`}
+      {...rest}
+    >
+      {children}
+    </span>
+  );
+};
+
+export { Text, Title, ThemedLink, TextContainer };

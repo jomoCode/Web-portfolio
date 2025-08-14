@@ -13,22 +13,33 @@ import { SwitchTabs } from "@/components/switch_tabs";
 import CodeSamples from "@/components/SwitchingTabsSection/code_sample";
 import { WorkExperience } from "@/components/SwitchingTabsSection/work_experience";
 import { ThemeToggleButton } from "@/components/theme_toggle_button";
-import { Text, ThemedLink, Title } from "@/components/text";
+import { Text, TextContainer, ThemedLink, Title } from "@/components/text";
 import { useTheme } from "@/context/theme_context";
-import Image from "next/image";
 
 const links = [
-  <ThemedLink key='about' href="about">About</ThemedLink>,
-  <DropDownPicker key='work' title="Work" />,
-  <ThemedLink key='services' href="services">Services</ThemedLink>,
-  <ThemedLink key='testimonials' href="#">Testimonials</ThemedLink>,
-  <ThemedLink key='experience' href="#">Experience</ThemedLink>,
-  <ThemedLink key='blog' href="#">Blog</ThemedLink>,
-  <ThemedLink key='contact' href="#">Contact</ThemedLink>,
+  <ThemedLink key="about" href="about">
+    About
+  </ThemedLink>,
+  <DropDownPicker key="work" title="Work" />,
+  <ThemedLink key="services" href="services">
+    Services
+  </ThemedLink>,
+  <ThemedLink key="testimonials" href="#">
+    Testimonials
+  </ThemedLink>,
+  <ThemedLink key="experience" href="#">
+    Experience
+  </ThemedLink>,
+  <ThemedLink key="blog" href="#">
+    Blog
+  </ThemedLink>,
+  <ThemedLink key="contact" href="#">
+    Contact
+  </ThemedLink>,
 ];
 
 const description = () => (
-  <Text>
+  <span>
     <Text className="text-justify">
       I’m JomoCode — a full-stack web and mobile developer.
     </Text>
@@ -46,25 +57,25 @@ const description = () => (
       progress is transparent and collaboration is seamless.
     </Text>
     <span className="m-5" />
-
-    <ul className="text-justify pl-5">
-      <li>
-        I offer, a tested, working project delivered within the agreed
-        timeframe.
-      </li>
-      <li>
-        Adaptable, well-documented code with testing flows for smooth handovers,
-        refactors, and updates.
-      </li>
-      <li>Clear communication and regular updates at every stage.</li>
-    </ul>
-
+    <TextContainer>
+      <ul className="text-justify pl-5">
+        <li>
+          I offer, a tested, working project delivered within the agreed
+          timeframe.
+        </li>
+        <li>
+          Adaptable, well-documented code with testing flows for smooth
+          handovers, refactors, and updates.
+        </li>
+        <li>Clear communication and regular updates at every stage.</li>
+      </ul>
+    </TextContainer>
     <span className="m-5" />
     <Text className="text-justify">
       Simply put: I design, build, and deliver — taking your project from first
       brainstorm to final launch with precision and professionalism.
     </Text>
-  </Text>
+  </span>
 );
 
 const profileIntroduction = "Hello, I'm Jomo";
@@ -106,13 +117,13 @@ const Home = () => {
           right={
             <div className=" p-4">
               {theme === "dark" ? (
-                <Image
-                  src="/dark_mode_profile_Image.png"
+                <img
+                  src="/dark_mode_profile_image.png"
                   alt="Profile image of JomoCode"
                   className="w-full max-h-[450px] rounded object-contain"
                 />
               ) : (
-                <Image
+                <img
                   src="/bright_mode_profile_image.png"
                   alt="profile image of jomoCode"
                   className="w-full max-h-[450px] rounded object-contain"
