@@ -2,7 +2,7 @@ import { useTheme } from "@/context/theme_context";
 import { cva, VariantProps } from "class-variance-authority";
 import { ReactNode } from "react";
 
-const SectionStyles = cva("py-10 w-[80%] px-10", {
+const SectionStyles = cva("py-10 w-[80%] md:px-10 px-0", {
   variants: {
     variant: {
       default: "",

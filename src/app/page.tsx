@@ -75,7 +75,7 @@ const Home = () => {
   const { theme } = useTheme();
   return (
     <div
-      className={`relative flex flex-col font-sans items-center justify-items-center min-h-screen pt-20 ${
+      className={`relative flex flex-col font-sans items-center justify-items-center min-h-screen md:pt-20 pt-10 ${
         theme === "dark" ? "bg-background-dark-1" : "bg-background-light-1"
       } `}
     >
@@ -90,8 +90,13 @@ const Home = () => {
           left={
             <div className=" p-4 flex flex-col justify-evenly h-full">
               <div className="w-full text-left">
-                <Title text={profileIntroduction} className="text-left py-2" />
-                <Text className="text-left mb-10">{profileSummary}</Text>
+                <Title
+                  text={profileIntroduction}
+                  className="md:text-left text-center py-2"
+                />
+                <Text className="md:text-left text-justify mb-10">
+                  {profileSummary}
+                </Text>
               </div>
 
               <CustomButton>Find Out More</CustomButton>
@@ -118,12 +123,12 @@ const Home = () => {
       </Section>
 
       {/* ABOUT */}
-      <div className="w-full h-[500px] mb-24 relative">
+      <div className="w-full md:h-[500px] h-[1000px] mb-24 relative ">
         <Section
           name="about"
           bg_dark="bg-background-dark-2"
           bg_light="bg-background-light-2"
-          className="absolute  top-[-60px] left-0 pt-20 px-40 w-full"
+          className="absolute  top-[-60px] left-0 pt-20 md:px-40 px-10 w-full"
         >
           <Heading text="About" className="text-center" />
           {description()}
@@ -136,7 +141,7 @@ const Home = () => {
           tabs={[
             {
               content: <CodeSamples />,
-              title: "Code Samples",
+              title: "Code",
             },
             {
               content: <WorkExperience />,
