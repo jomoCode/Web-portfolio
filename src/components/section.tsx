@@ -34,7 +34,7 @@ const Section = ({
   return (
     <section
       aria-label={`${name} section`}
-      id="section"
+      id={name}
       className={`${SectionStyles({ variant: variant })} ${
         theme === "dark"
           ? bg_dark ?? "bg-background-dark-1"

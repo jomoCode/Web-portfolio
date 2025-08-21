@@ -171,13 +171,13 @@ const Home = () => {
 
         {/* PROJECT */}
         <SideBySideSection
-          left={<ProjectImage src="/ecommerce.webp" alt="Ecommerce Website" />}
+          left={<ProjectImage src="/fashionshop.png" alt="Ecommerce Website" />}
           right={
             <ProjectInfo
-              title="Ecommerce Website"
+              title="Fashion shop"
               description="A fully responsive online store with product listings, cart functionality, checkout, and an admin dashboard."
-              tech={["Next.js", "Tailwind CSS", "Node.js", "MongoDB"]}
-              liveLink="https://myprojectlive.com"
+              tech={["Html", "CSS", "javascript"]}
+              liveLink="https://jomocode.github.io/FashionShop/"
             />
           }
         />
