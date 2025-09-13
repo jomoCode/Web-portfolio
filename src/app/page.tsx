@@ -38,7 +38,7 @@ const links = [
   </ThemedLink>,
 ];
 
-const description = () => (
+const descriptionDesktop = () => (
   <span>
     <Text className="text-justify">
       I’m JomoCode — a full-stack web and mobile developer.
@@ -78,6 +78,22 @@ const description = () => (
   </span>
 );
 
+const descriptionMobile = () => (
+  <span>
+    <Text className="text-justify">
+      I’m JomoCode — a full-stack web and mobile developer.
+    </Text>
+    <Text className="text-justify">
+      With 2+ years of experience, I specialize in building responsive,
+      scalable, and modern applications that deliver seamless user experiences.
+    </Text>
+    <Text className="text-justify">
+      I’m passionate about turning ideas into functional solutions that help
+      businesses and individuals succeed.
+    </Text>
+  </span>
+);
+
 const profileIntroduction = "Hello, I'm Jomo";
 
 const profileSummary =
@@ -100,19 +116,34 @@ const Home = () => {
       <Section name="summary" className="pb-0">
         <SideBySideSection
           left={
-            <div className=" p-4 flex flex-col justify-evenly h-full">
-              <div className="w-full text-left">
-                <Title
-                  text={profileIntroduction}
-                  className="md:text-left text-center py-2"
-                />
-                <Text className="md:text-left text-justify mb-10">
-                  {profileSummary}
-                </Text>
+            <>
+              {/* // Desktop view. Todo: make desktop view into a component */}
+              <div className=" p-4 hidden md:flex flex-col justify-evenly h-full">
+                <div className="w-full text-left">
+                  <Title
+                    text={profileIntroduction}
+                    className="md:text-left text-center py-2"
+                  />
+                  <Text className="md:text-left text-justify mb-10">
+                    {profileSummary}
+                  </Text>
+                </div>
+
+                <CustomButton>Find Out More</CustomButton>
               </div>
 
-              <CustomButton>Find Out More</CustomButton>
-            </div>
+              {/* // Mobile view: */}
+              <div>
+                <Heading
+                  text={"Mogbolu John"}
+                  className="md:hidden text-left"
+                />
+                <Title
+                  text="Mobile and web developer"
+                  className="md:hidden text-left px-5"
+                />
+              </div>
+            </>
           }
           right={
             <div className=" p-4">
@@ -142,8 +173,9 @@ const Home = () => {
           bg_light="bg-background-light-2"
           className="absolute  top-[-60px] left-0 pt-20 md:px-40 px-10 w-full"
         >
-          <Heading text="About" className="text-center" />
-          {description()}
+          <Heading text="About" className="text-center py-5 px-2" />
+          <div className="hidden md:block ">{descriptionDesktop()}</div>
+          <div className="md:hidden">{descriptionMobile()}</div>
         </Section>
       </div>
 

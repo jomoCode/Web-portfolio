@@ -8,9 +8,14 @@ type HeadingProps = {
 };
 
 const Heading = ({ text, refs, className }: HeadingProps) => {
-  const {theme}= useTheme();
+  const { theme } = useTheme();
   return (
-    <h1 className={`text-2xl font-bold py-5 px-2 ${className} ${theme === "dark"? "text-text-dark":"text-text-light"}`} {...refs}>
+    <h1
+      className={`text-2xl font-bold ${className} ${
+        theme === "dark" ? "text-text-dark" : "text-text-light"
+      }`}
+      {...refs}
+    >
       {text}
     </h1>
   );
