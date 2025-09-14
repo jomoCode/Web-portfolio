@@ -1,4 +1,3 @@
-// components/CodeSamples.tsx
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { Text, Title } from "../text";
@@ -10,14 +9,14 @@ const projects = [
     tech: ["React Native", "Expo", "Firebase", "Bugsnag"],
     description:
       "A mobile ecommerce app for selling used items. Includes authentication, image uploads, notifications, and error tracking.",
-    github: "https://github.com/Jomoartz/done-with-it",
+    github: "https://github.com/jomoCode/DoneWithThis",
   },
   {
     name: "Ecommerce Website",
     tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
     description:
       "A responsive online store with product listings, cart, checkout, and admin dashboard.",
-    github: "https://github.com/Jomoartz/ecommerce",
+    github: "https://github.com/jomoCode/FashionShop",
   },
   {
     name: "Portfolio Website",
