@@ -18,7 +18,6 @@ export default function ContactSection({
   email,
   github,
   linkedin,
-  twitter,
   medium,
 }: ContactSectionProps) {
   const [form, setForm] = useState({ name: "", email: "", project: "" });

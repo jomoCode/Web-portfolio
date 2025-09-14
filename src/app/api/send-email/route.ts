@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         service_id: process.env.EMAILJS_SERVICE_ID,
         template_id: process.env.EMAILJS_TEMPLATE_ID,
-        user_id: process.env.EMAILJS_PRIVATE_KEY, // stays safe on server
+        user_id: process.env.EMAILJS_PRIVATE_KEY,
         template_params: {
           from_name: name,
           reply_to: email,
@@ -28,8 +28,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: err }, { status: 500 });
     }
 
-    return NextResponse.json({ message: "Email sent successfully ✅" }, { status: 200 });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ message: "Email sent successfully" }, { status: 200 });
+  } catch (err: { message?: string } | unknown) {
+    if (err instanceof Error && err.message) {
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
   }
 }
