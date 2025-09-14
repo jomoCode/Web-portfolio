@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Aldrich } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/theme_context";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const aldrich = Aldrich({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-aldrich",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Web_PortFolio jomoCode",
-  description: "My web-portflio",
+  description: "My web-portfolio",
 };
 
 export default function RootLayout({
@@ -25,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${aldrich.className} antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
