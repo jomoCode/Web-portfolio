@@ -2,7 +2,8 @@
 
 import { useTheme } from "@/context/theme_context";
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
+import clsx from "clsx";
 
 interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   text: string;
@@ -12,9 +13,11 @@ const Title = ({ text, className = "", ...rest }: TitleProps) => {
   const { theme } = useTheme();
   return (
     <h2
-      className={`text-xl ${className}, ${
+      className={clsx(
+        "text-xl",
+        className,
         theme === "dark" ? "text-text-dark" : "text-text-light"
-      }`}
+      )}
       {...rest}
     >
       {text}
@@ -22,18 +25,37 @@ const Title = ({ text, className = "", ...rest }: TitleProps) => {
   );
 };
 
-interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  text?: string | ReactNode;
-  childen?: string | ReactNode;
-}
+type TextVariant = "sm" | "md" | "lg" | "xl" | "2xl";
 
-const Text = ({ children, className = "", ...rest }: TextProps) => {
+type TextProps = HTMLAttributes<HTMLParagraphElement> & {
+  className?: string;
+  variant?: TextVariant;
+};
+
+const Text = ({
+  children,
+  className = "",
+  variant = "md",
+  ...rest
+}: TextProps) => {
   const { theme } = useTheme();
+
+  const variantClasses: Record<TextVariant, string> = {
+    sm: "text-sm",
+    md: "text-base",
+    lg: "text-lg",
+    xl: "text-xl font-semibold",
+    "2xl": "text-2xl font-bold",
+  };
+
   return (
     <p
-      className={`text-xl w-full ${className}   ${
-        theme === "dark" ? "text-text-dark" : "text-text-light"
-      }`}
+      className={clsx(
+        "w-full",
+        variantClasses[variant],
+        theme === "dark" ? "text-text-dark" : "text-text-light",
+        className
+      )}
       {...rest}
     >
       {children}
@@ -68,13 +90,16 @@ const ThemedLink = ({
   );
 };
 
-
 interface TextContainerProps extends React.HTMLAttributes<HTMLSpanElement> {
   text?: string | ReactNode;
   childen?: string | ReactNode;
 }
 
-const TextContainer = ({ children, className = "", ...rest }: TextContainerProps) => {
+const TextContainer = ({
+  children,
+  className = "",
+  ...rest
+}: TextContainerProps) => {
   const { theme } = useTheme();
   return (
     <span

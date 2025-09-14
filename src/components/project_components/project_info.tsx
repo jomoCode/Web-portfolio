@@ -1,6 +1,7 @@
 import { Text } from "../text";
 import { CustomButton } from "../button";
 import { useTheme } from "@/context/theme_context";
+import clxs from "clsx";
 
 interface ProjectInfoProps {
   title: string;
@@ -17,7 +18,7 @@ export const ProjectInfo = ({
 }: ProjectInfoProps) => {
   const { theme } = useTheme();
   return (
-    <div>
+    <div className={clxs( theme==='dark'? "bg-blue-500/10 md:bg-background-dark-1": 'bg-blue-500/10 md:bg-background-light-1', " p-2 md:p-0")}>
       <Text className="text-center py-2">{title}</Text>
       <Text className="text-left py-2">{description}</Text>
       <div className="flex flex-wrap gap-2 my-6">

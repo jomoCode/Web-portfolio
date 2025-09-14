@@ -1,8 +1,9 @@
 import { useTheme } from "@/context/theme_context";
 import { cva, VariantProps } from "class-variance-authority";
 import { ReactNode } from "react";
+import clxs from "clsx";
 
-const SectionStyles = cva("py-10 w-[80%] md:px-10 px-0", {
+const SectionStyles = cva("py-10 w-[80%] px-0 md:px-10", {
   variants: {
     variant: {
       default: "",
@@ -28,18 +29,20 @@ const Section = ({
   variant,
   bg_dark,
   bg_light,
-  className
+  className,
 }: SectionProps) => {
   const { theme } = useTheme();
   return (
     <section
       aria-label={`${name} section`}
       id={name}
-      className={`${SectionStyles({ variant: variant })} ${
+      className={clxs(
+        SectionStyles({ variant: variant }),
         theme === "dark"
           ? bg_dark ?? "bg-background-dark-1"
-          : bg_light ?? "bg-background-light-1"
-      } ${className}`}
+          : bg_light ?? "bg-background-light-1",
+        className
+      )}
     >
       {children}
     </section>
