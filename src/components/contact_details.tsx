@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
-import { FaGithub, FaLinkedin, FaTwitter, FaMedium } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
 import { CustomButton } from "./button";
 import { useTheme } from "@/context/theme_context";
 import Heading from "./heading";
+import { CustomAlert } from "./custom_alert";
 
 interface ContactSectionProps {
   email: string;
@@ -22,6 +23,14 @@ export default function ContactSection({
 }: ContactSectionProps) {
   const [form, setForm] = useState({ name: "", email: "", project: "" });
   const { theme } = useTheme();
+  const [loading, setLoading] = useState(false);
+
+  // alert state
+  const [alert, setAlert] = useState({
+    show: false,
+    message: "",
+    type: "success" as "success" | "error",
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,17 +38,49 @@ export default function ContactSection({
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thanks ${form.name}, I’ll get back to you soon!`);
-    setForm({ name: "", email: "", project: "" });
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setAlert({
+          show: true,
+          message: "Thanks! Your message has been sent ✅",
+          type: "success",
+        });
+        setForm({ name: "", email: "", project: "" });
+      } else {
+        setAlert({
+          show: true,
+          message: "Error: " + data.error,
+          type: "error",
+        });
+      }
+    } catch (err) {
+      setAlert({
+        show: true,
+        message: "Something went wrong, please try again later.",
+        type: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const mailtoLink = `mailto:${email}?subject=I need your service&body=Hello, I need your service for...`;
 
   return (
-    <div className="w-full">
-      <Heading text="Contact Me"  />
+    <div className="w-full relative">
+      <Heading text="Contact Me" className="mb-5" />
 
       {/* Contact Form */}
       <form
@@ -55,9 +96,9 @@ export default function ContactSection({
           value={form.name}
           onChange={handleChange}
           required
-          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
-            theme === "dark" ? "text-text-text-light" : "text-text-light"
-          } `}
+          className={`w-full placeholder-gray-700 text-xl rounded p-3 ${
+            theme === "dark" ? "text-text-light" : "text-text-dark"
+          }`}
         />
         <input
           type="email"
@@ -66,9 +107,9 @@ export default function ContactSection({
           value={form.email}
           onChange={handleChange}
           required
-          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
-            theme === "dark" ? "text-text-text-light" : "text-text-light"
-          } `}
+          className={`w-full placeholder-gray-700 text-xl rounded p-3 ${
+            theme === "dark" ? "text-text-light" : "text-text-dark"
+          }`}
         />
         <textarea
           name="project"
@@ -76,28 +117,31 @@ export default function ContactSection({
           value={form.project}
           onChange={handleChange}
           required
-          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
-            theme === "dark" ? "text-text-text-light" : "text-text-light"
-          } `}
+          className={`w-full placeholder-gray-700 text-xl rounded p-3 ${
+            theme === "dark" ? "text-text-light" : "text-text-dark"
+          }`}
         />
-        <div className={"px-15"}>
-        <CustomButton
-          type="submit"
-          className={` rounded-full font-semibold transition w-full py-0 mb-2 ${
-            theme === "dark" ? "bg-blue-900" : "bg-blue-500"
-          }`}
-        >
-          Send Message
-        </CustomButton>
-        <CustomButton
-          className={` rounded-full font-semibold transition w-full py-0 ${
-            theme === "dark" ? "bg-blue-900" : "bg-blue-400"
-          }`}
-        >
-          <a href={mailtoLink}>Email Me</a>
-        </CustomButton></div>
+        <div className="md:px-15">
+          <CustomButton
+            type="submit"
+            disabled={loading}
+            className={`rounded-full font-semibold transition w-full py-0 mb-2 ${
+              theme === "dark" ? "bg-blue-900" : "bg-blue-500"
+            }`}
+          >
+            {loading ? "Sending..." : "Send Message"}
+          </CustomButton>
+          <CustomButton
+            className={`rounded-full font-semibold transition w-full py-0 ${
+              theme === "dark" ? "bg-blue-900" : "bg-blue-400"
+            }`}
+          >
+            <a href={mailtoLink}>Email Me</a>
+          </CustomButton>
+        </div>
       </form>
 
+      {/* Socials */}
       <div className="flex justify-center gap-6 text-2xl py-20">
         <a
           href={github}
@@ -116,14 +160,6 @@ export default function ContactSection({
           <FaLinkedin />
         </a>
         <a
-          href={twitter}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-sky-500"
-        >
-          <FaTwitter />
-        </a>
-        <a
           href={medium}
           target="_blank"
           rel="noopener noreferrer"
@@ -132,6 +168,14 @@ export default function ContactSection({
           <FaMedium />
         </a>
       </div>
+
+      {/* Custom Alert */}
+      <CustomAlert
+        show={alert.show}
+        message={alert.message}
+        type={alert.type}
+        onClose={() => setAlert({ ...alert, show: false })}
+      />
     </div>
   );
 }
