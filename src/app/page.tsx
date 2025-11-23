@@ -1,5 +1,4 @@
 "use client";
-import { CustomButton } from "@/components/button";
 import ContactSection from "@/components/contact_details";
 import { DropDownPicker } from "@/components/drop_down_picker";
 import Heading from "@/components/heading";
@@ -229,6 +228,19 @@ const Home = () => {
               description="A fully responsive online store with product listings, cart functionality, checkout, and an admin dashboard."
               tech={["Next.js", "Tailwind CSS", "Node.js", "MongoDB"]}
               liveLink="https://myprojectlive.com"
+            />
+          }
+        />
+        <SideBySideSection
+          containerClassNames="mb-5"
+          left={<ProjectImage src="/propi.png" alt="Realtor Website" />}
+          right={
+            <ProjectInfo
+              title="Propi"
+              description="Find trusted conveyancers near you by location, rating, and service type.
+Responsive design, secure checkout, and an admin dashboard to manage listings and transactions."
+              tech={["Next.js", "Tailwind CSS", "supabase", "fastapi"]}
+              liveLink="https://propi-production.up.railway.app/"
             />
           }
         />
