@@ -13,7 +13,8 @@ export const ProjectImage = ({ src, alt }: ProjectImageProps) => {
         alt={alt}
         width={500}
         height={500}
-        className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-300"
+      
+        className="w-full max-h-96 object-contain transform hover:scale-105 transition-transform duration-300"
       />
     </div>
   );

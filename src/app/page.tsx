@@ -244,6 +244,35 @@ Responsive design, secure checkout, and an admin dashboard to manage listings an
             />
           }
         />
+        <SideBySideSection
+          containerClassNames="mb-5"
+          left={
+            <ProjectImage
+              src="/mameds_mobile.jpg"
+              alt="Medication adherance Website"
+            />
+          }
+          right={
+            <ProjectInfo
+              title="MaMeds Mobile"
+              description="Medication Adherance, access drug database, notification reminder, connect with pharmacists, adherance tracking... not active"
+              tech={["React native", "Expo", "firebase", "vitest"]}
+              liveLink="/"
+            />
+          }
+        />
+        <SideBySideSection
+          containerClassNames="mb-5"
+          left={<ProjectImage src="/mameds_web.png" alt="Realtor Website" />}
+          right={
+            <ProjectInfo
+              title="MaMeds"
+              description="Medication Adherance, access drug database, notification reminder, connect with pharmacists, adherance tracking"
+              tech={["React", "Vite", "firebase", "vitest"]}
+              liveLink="https://app.mameds.gr/"
+            />
+          }
+        />
       </Section>
 
       <Section name="contact">
