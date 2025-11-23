@@ -96,7 +96,7 @@ const ContactSection = ({
           onChange={handleChange}
           required
           className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
-            theme === "dark" ? "text-text-text-light" : "text-text-light"
+            theme === "dark" ? "text-text-dark" : "text-text-light"
           }`}
         />
         <input
@@ -107,7 +107,7 @@ const ContactSection = ({
           onChange={handleChange}
           required
           className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
-            theme === "dark" ? "text-text-text-light" : "text-text-light"
+            theme === "dark" ? "text-text-dark" : "text-text-light"
           }`}
         />
         <textarea
@@ -117,7 +117,7 @@ const ContactSection = ({
           onChange={handleChange}
           required
           className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
-            theme === "dark" ? "text-text-text-light" : "text-text-light"
+            theme === "dark" ? "text-text-dark" : "text-text-light"
           }`}
         />
         <div className="md:px-15">
