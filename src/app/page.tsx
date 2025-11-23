@@ -190,6 +190,7 @@ const Home = () => {
 
         <CodeSample
           title="Task Tracker"
+          repoLink="https://github.com/jomoCode/Task_Tracker"
           description="Tracks Adherance to tasks. includes local file storage, local notifications, and calendar integration"
           tech={["React Native", "TypeScript", "Bugsnag", "Expo"]}
         />
@@ -198,11 +199,13 @@ const Home = () => {
           title="Portfolio Website"
           description="That's this website"
           tech={["React", "TypeScript", "Tailwind"]}
+          repoLink="https://github.com/jomoCode/Web-portfolio"
         />
         <CodeSample
-          title="Ecommerce Website"
+          title="Fashion Shop"
           description="A mobile ecommerce app for selling used items. Includes authentication, image uploads, notifications, and error tracking."
           tech={["Javascript", "Html", "Css"]}
+          repoLink="https://github.com/jomoCode/FashionShop"
         />
         <Heading text={"Projects"} className="mt-20 mb-5" />
 
@@ -255,7 +258,7 @@ Responsive design, secure checkout, and an admin dashboard to manage listings an
           right={
             <ProjectInfo
               title="MaMeds Mobile"
-              description="Medication Adherance, access drug database, notification reminder, connect with pharmacists, adherance tracking... not active"
+              description="Medication adherence app featuring drug database access, reminder notifications, pharmacist connection, and adherence tracking. (Project currently inactive.)"
               tech={["React native", "Expo", "firebase", "vitest"]}
               liveLink="/"
             />
@@ -267,7 +270,7 @@ Responsive design, secure checkout, and an admin dashboard to manage listings an
           right={
             <ProjectInfo
               title="MaMeds"
-              description="Medication Adherance, access drug database, notification reminder, connect with pharmacists, adherance tracking"
+              description="Responsive medication product website with SEO-optimized structure and clean layout"
               tech={["React", "Vite", "firebase", "vitest"]}
               liveLink="https://app.mameds.gr/"
             />
