@@ -4,6 +4,7 @@ import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
 import { CustomButton } from "./button";
 import { useTheme } from "@/context/theme_context";
 import Heading from "./heading";
+import emailjs from "emailjs-com";
 import { CustomAlert } from "./custom_alert";
 
 interface ContactSectionProps {
@@ -14,12 +15,13 @@ interface ContactSectionProps {
   medium: string;
 }
 
-export default function ContactSection({
+const ContactSection = ({
   email,
   github,
   linkedin,
+  twitter,
   medium,
-}: ContactSectionProps) {
+}: ContactSectionProps) => {
   const [form, setForm] = useState({ name: "", email: "", project: "" });
   const { theme } = useTheme();
   const [loading, setLoading] = useState(false);
@@ -37,42 +39,40 @@ export default function ContactSection({
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setAlert({
-          show: true,
-          message: "Thanks! Your message has been sent ✅",
-          type: "success",
-        });
-        setForm({ name: "", email: "", project: "" });
-      } else {
-        setAlert({
-          show: true,
-          message: "Error: " + data.error,
-          type: "error",
-        });
-      }
-    } catch (err) {
-      setAlert({
-        show: true,
-        message: "Something went wrong, please try again later.",
-        type: "error",
-      });
-    } finally {
-      setLoading(false);
-    }
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.project,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+      .then(
+        () => {
+          setAlert({
+            show: true,
+            message: `Thanks ${form.name}, your message has been sent!`,
+            type: "success",
+          });
+          setForm({ name: "", email: "", project: "" });
+        },
+        (error) => {
+          console.error("EmailJS Error:", error);
+          setAlert({
+            show: true,
+            message: "Oops! Something went wrong. Please try again.",
+            type: "error",
+          });
+        }
+      )
+      .finally(() => setLoading(false));
   };
 
   const mailtoLink = `mailto:${email}?subject=I need your service&body=Hello, I need your service for...`;
@@ -95,8 +95,8 @@ export default function ContactSection({
           value={form.name}
           onChange={handleChange}
           required
-          className={`w-full placeholder-gray-700 text-xl rounded p-3 ${
-            theme === "dark" ? "text-text-light" : "text-text-dark"
+          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
+            theme === "dark" ? "text-text-text-light" : "text-text-light"
           }`}
         />
         <input
@@ -106,8 +106,8 @@ export default function ContactSection({
           value={form.email}
           onChange={handleChange}
           required
-          className={`w-full placeholder-gray-700 text-xl rounded p-3 ${
-            theme === "dark" ? "text-text-light" : "text-text-dark"
+          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
+            theme === "dark" ? "text-text-text-light" : "text-text-light"
           }`}
         />
         <textarea
@@ -116,8 +116,8 @@ export default function ContactSection({
           value={form.project}
           onChange={handleChange}
           required
-          className={`w-full placeholder-gray-700 text-xl rounded p-3 ${
-            theme === "dark" ? "text-text-light" : "text-text-dark"
+          className={`w-full placeholder-gray-700 text-xl rounded p-3  ${
+            theme === "dark" ? "text-text-text-light" : "text-text-light"
           }`}
         />
         <div className="md:px-15">
@@ -178,3 +178,6 @@ export default function ContactSection({
     </div>
   );
 }
+
+
+export default ContactSection;
