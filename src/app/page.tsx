@@ -1,293 +1,212 @@
 "use client";
-import ContactSection from "@/components/contact_details";
-import { DropDownPicker } from "@/components/drop_down_picker";
-import Heading from "@/components/heading";
-import { ProjectInfo } from "@/components/project_components/project_info";
-import { ProjectImage } from "@/components/project_components/projectImage";
-import { Section } from "@/components/section";
-import SideBySideSection from "@/components/side_by_side_section";
-import { ThemeToggleButton } from "@/components/theme_toggle_button";
-import { Text, TextContainer, ThemedLink, Title } from "@/components/text";
-import { useTheme } from "@/context/theme_context";
-import CodeSample from "@/components/CodeSample";
 
-const links = [
-  <ThemedLink key="about" href="about">
-    About
-  </ThemedLink>,
-  <DropDownPicker key="work" title="Work" />,
-  <ThemedLink key="services" href="services">
-    Services
-  </ThemedLink>,
-  <ThemedLink key="testimonials" href="#">
-    Testimonials
-  </ThemedLink>,
-  <ThemedLink key="experience" href="#">
-    Experience
-  </ThemedLink>,
-  <ThemedLink key="blog" href="#">
-    Blog
-  </ThemedLink>,
-  <ThemedLink key="contact" href="#">
-    Contact
-  </ThemedLink>,
+import React from 'react';
+import { motion } from "motion/react"
+import { 
+  ExternalLink, 
+  Smartphone, 
+  Code2,
+  Rocket, 
+  Heart, 
+  Mail, 
+  Layers,
+  Sparkles
+} from 'lucide-react';
+
+import { FaGithub, FaLinkedin } from "react-icons/fa"
+
+const PROJECTS = [
+  { 
+    title: "Propi", 
+    desc: "Built a real estate platform using Next.js and FastAPI, focusing on dashboard UI, data handling, and API integration.", 
+    link: "https://www.propi.io/", 
+    tags: ["Nextjs", "Tanstack", "FastAPI", "Supabase", "OpenAI"] 
+  },
+  { 
+    title: "Nobzo", 
+    desc: "Worked on web and mobile features for a social media and streaming platform using React Native and backend services.", 
+    link: "https://nobzo-website.vercel.app/", 
+    tags: ["React Native", "Expo", "Render", "Express"] 
+  },
+  { 
+    title: "Product Showcase", 
+    desc: "Built a platform for showcasing applications with dynamic data handling and Firebase integration.", 
+    link: "https://testfirebaseproject-47507.web.app/", 
+    tags: ["Nextjs", "Firebase", "Tanstack"] 
+  },
+  { 
+    title: "Studomia", 
+    desc: "Learning platform built with Nuxt.js and NestJS where I handled frontend structure and API integration.", 
+    link: "https://appetize.io/app/b_4fjg2udiewvcqdgsa3x2jgk2em", 
+    tags: ["Nuxt.js", "NestJS", "Tailwind"] 
+  },
+  { 
+    title: "Life Streak", 
+    desc: "Mobile habit tracking app implementing streak logic, local storage (SQLite), and user-focused UX.", 
+    link: "https://appetize.io/app/b_7b5nkkffajaqno7jbb56aeek3a", 
+    tags: ["React Native", "UX Design", "SQLite"] 
+  },
+  { 
+    title: "Mameds", 
+    desc: "Web app built with Next.js and Firebase featuring real-time data handling and interactive UI.", 
+    link: "https://mameds.gr/", 
+    tags: ["Next.js", "Firebase", "Motion"] 
+  }
 ];
 
-const descriptionDesktop = () => (
-  <span>
-    <Text className="text-justify">
-      I’m JomoCode — a full-stack web and mobile developer.
-    </Text>
+const EXPERIENCE = [
+  { company: "Nobzo", role: "Frontend Engineer", date: "Mar 2026 - Present" },
+  { company: "Recommend", role: "Frontend Engineer", date: "Feb 2026 - Present" },
+  { company: "Ekohacks", role: "Fullstack Engineer (Mobile & Web)", date: "Jul 2024 - Mar 2026" },
+];
 
-    <Text className="text-justify">
-      I specialize in crafting responsive front-ends and robust back-end
-      systems. I’ve delivered ecommerce platforms, mobile applications,
-      content-driven websites, and real-time notification systems — all with
-      clean, maintainable code optimized for performance.
-    </Text>
+const SKILLS = [
+  "TypeScript", "Python", "React Native", "Next.js", 
+  "Nuxt.js", "FastAPI", "NestJS",
+  "Firebase", "Supabase",
+  "Tailwind CSS", "Framer Motion"
+];
 
-    <Text className="text-justify">
-      From planning to deployment, I keep clients fully in the loop with
-      organized workflows in Trello, Slack, GitHub, and Confluence, ensuring
-      progress is transparent and collaboration is seamless.
-    </Text>
-    <span className="m-5" />
-    <TextContainer>
-      <ul className="text-justify pl-5">
-        <li>
-          <Text>
-            - I offer, a tested, working project delivered within the agreed
-            timeframe.
-          </Text>
-        </li>
-        <li>
-          <Text>
-            - Adaptable, well-documented code with testing flows for smooth
-            handovers, refactors, and updates
-          </Text>
-        </li>
-        <li>
-          <Text>- Clear communication and regular updates at every stage</Text>
-        </li>
-      </ul>
-    </TextContainer>
-    <span className="m-5" />
-    <Text className="text-justify">
-      Simply put: I design, build, and deliver — taking your project from first
-      brainstorm to final launch with precision and professionalism.
-    </Text>
-  </span>
-);
+const DEFAULT_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-const descriptionMobile = () => (
-  <span>
-    <Text className="text-left">
-      I’m JomoCode — a full-stack web and mobile developer.
-    </Text>
-    <Text className="text-left">
-      With 2+ years of experience, I specialize in building responsive,
-      scalable, and modern applications that deliver seamless user experiences.
-    </Text>
-    <Text className="text-left">
-      I’m passionate about turning ideas into functional solutions that help
-      businesses and individuals succeed.
-    </Text>
-  </span>
-);
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: DEFAULT_EASE }
+};
 
-const profileIntroduction = "Hello, I'm Jomo";
-
-const profileSummary =
-  "Full-stack mobile and web developer specializing in JavaScript, React, and Python. I build clean, responsive interfaces with a focus on performance, scalability, and exceptional user experiences";
-
-const Home = () => {
-  const { theme } = useTheme();
+export default function Portfolio() {
   return (
-    <div
-      className={`relative flex flex-col font-sans items-center justify-items-center min-h-screen min-w-xs md:pt-10 pt-10 ${
-        theme === "dark" ? "bg-background-dark-1" : "bg-background-light-1"
-      } `}
-    >
-      <div className="fixed top-8 right-[5]">
-        <ThemeToggleButton />
-      </div>
-      {/* <Header headerContent={links} /> */}
-
-      {/* SUMMARY */}
-      <Section name="summary" className="pb-0">
-        <SideBySideSection
-          left={
-            <div className="h-full">
-              {/* // Desktop view. Todo: make desktop view into a component */}
-              <div className=" p-4 hidden md:flex flex-col justify-center items-center lg:h-[450px] max-w-lg">
-                <div className="text-left">
-                  <Title
-                    text={profileIntroduction}
-                    className="md:text-left text-center text-sm py-2"
-                  />
-                  <Text className="md:text-left text-justify mb-10">
-                    {profileSummary}
-                  </Text>
-                </div>
-
-                {/* <CustomButton>Find Out More</CustomButton> */}
-              </div>
-
-              {/* // Mobile view: */}
-              <div>
-                <Heading
-                  text={"Mogbolu John"}
-                  className="md:hidden text-left"
-                />
-                <Title
-                  text="Mobile and web developer"
-                  className="md:hidden text-left"
-                />
-              </div>
-            </div>
-          }
-          right={
-            <div className=" flex flex-col px-4  mt-auto w-fit">
-              {theme === "dark" ? (
-                <img
-                  src="/dark_mode_profile_image.png"
-                  alt="Profile image of JomoCode"
-                  className="w-fit max-h-[450px] rounded object-contain mt-auto"
-                />
-              ) : (
-                <img
-                  src="/bright_mode_profile_image.png"
-                  alt="profile image of jomoCode"
-                  className="w-fit max-h-[450px] rounded object-contain mt-auto"
-                />
-              )}
-            </div>
-          }
+    <div className="min-h-screen bg-[#101828] text-[#f5f5f5] font-aldrich overflow-x-hidden">
+      
+      {/* Background */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <motion.div 
+          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#c0d5ff]/5 blur-[120px]" 
         />
-      </Section>
-
-      {/* ABOUT */}
-      <div className="w-full md:mb-10">
-        <Section
-          name="about"
-          bg_dark="bg-background-dark-2"
-          bg_light="bg-background-light-2"
-          className="pt-20 md:px-40 px-10 w-full"
-        >
-          <Heading text="About me" className="text-center py-5 px-2" />
-          <div className="hidden md:block ">{descriptionDesktop()}</div>
-          <div className="md:hidden">{descriptionMobile()}</div>
-        </Section>
       </div>
 
-      {/* SKILLS AND EXPERIENCE */}
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-md border-b border-[#79a3f6]/10 px-6 py-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <span className="text-xl font-bold text-[#79a3f6]">JOMO.dev</span>
+          <div className="flex gap-6 text-sm text-[#9cbdff]">
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
 
-      <Section
-        name="Skill"
-        className="flex flex-col gap-2 w-full px-5 md:mb-20"
-      >
-        <Title text="Code Samples" className="text-center" />
+      {/* Hero */}
+      <section className="container mx-auto px-6 pt-40 pb-20 text-center">
+        <div className="bg-[#c0d5ff] text-[#1e2939] px-6 py-1.5 rounded-full text-xs font-bold mb-6 inline-block">
+          SHIPPING REAL-WORLD WEB & MOBILE APPLICATIONS
+        </div>
 
-        <CodeSample
-          title="Task Tracker"
-          repoLink="https://github.com/jomoCode/Task_Tracker"
-          description="Tracks Adherance to tasks. includes local file storage, local notifications, and calendar integration"
-          tech={["React Native", "TypeScript", "Bugsnag", "Expo"]}
-        />
+        <h1 className="text-4xl md:text-8xl font-bold mb-6">
+          John-Johanan <br />
+          <span className="text-[#79a3f6]">Mogbolu</span>
+        </h1>
 
-        <CodeSample
-          title="Portfolio Website"
-          description="That's this website"
-          tech={["React", "TypeScript", "Tailwind"]}
-          repoLink="https://github.com/jomoCode/Web-portfolio"
-        />
-        <CodeSample
-          title="Fashion Shop"
-          description="A mobile ecommerce app for selling used items. Includes authentication, image uploads, notifications, and error tracking."
-          tech={["Javascript", "Html", "Css"]}
-          repoLink="https://github.com/jomoCode/FashionShop"
-        />
-        <Heading text={"Projects"} className="mt-20 mb-5" />
 
-        {/* PROJECT */}
-        <SideBySideSection
-          containerClassNames="mb-5"
-          left={<ProjectImage src="/fashionshop.png" alt="Ecommerce Website" />}
-          right={
-            <ProjectInfo
-              title="Fashion shop"
-              description="A fully responsive online store with product listings, cart functionality, checkout, and an admin dashboard."
-              tech={["Html", "CSS", "javascript"]}
-              liveLink="https://jomocode.github.io/FashionShop/"
-            />
-          }
-        />
-        <SideBySideSection
-          containerClassNames="mb-5"
-          left={<ProjectImage src="/ecommerce.webp" alt="Ecommerce Website" />}
-          right={
-            <ProjectInfo
-              title="Ecommerce Website"
-              description="A fully responsive online store with product listings, cart functionality, checkout, and an admin dashboard."
-              tech={["Next.js", "Tailwind CSS", "Node.js", "MongoDB"]}
-              liveLink="https://myprojectlive.com"
-            />
-          }
-        />
-        <SideBySideSection
-          containerClassNames="mb-5"
-          left={<ProjectImage src="/propi.png" alt="Realtor Website" />}
-          right={
-            <ProjectInfo
-              title="Propi"
-              description="Find trusted conveyancers near you by location, rating, and service type.
-Responsive design, secure checkout, and an admin dashboard to manage listings and transactions."
-              tech={["Next.js", "Tailwind CSS", "supabase", "fastapi"]}
-              liveLink="https://propi-production.up.railway.app/"
-            />
-          }
-        />
-        <SideBySideSection
-          containerClassNames="mb-5"
-          left={
-            <ProjectImage
-              src="/mameds_mobile.jpg"
-              alt="Medication adherance Website"
-            />
-          }
-          right={
-            <ProjectInfo
-              title="MaMeds Mobile"
-              description="Medication adherence app featuring drug database access, reminder notifications, pharmacist connection, and adherence tracking. (Project currently inactive.)"
-              tech={["React native", "Expo", "firebase", "vitest"]}
-              liveLink="/"
-            />
-          }
-        />
-        <SideBySideSection
-          containerClassNames="mb-5"
-          left={<ProjectImage src="/mameds_web.png" alt="Realtor Website" />}
-          right={
-            <ProjectInfo
-              title="MaMeds"
-              description="Responsive medication product website with SEO-optimized structure and clean layout"
-              tech={["React", "Vite", "firebase", "vitest"]}
-              liveLink="https://app.mameds.gr/"
-            />
-          }
-        />
-      </Section>
+        <p className="text-sm text-[#9cbdff]/60 mb-4">
+          2+ years experience building and shipping production applications
+        </p>
 
-      <Section name="contact">
-        <ContactSection
-          email="johnjohananmogbolu@gmail.com"
-          github="https://github.com/Jomocode"
-          linkedin="https://www.linkedin.com/in/mogbolu-johnjohanan/"
-          twitter="https://twitter.com/yourhandle"
-          medium="https://medium.com/@johnjohananmogbolu"
-        />
-      </Section>
+        <p className="max-w-2xl mx-auto text-[#9cbdff]/80 mb-12">
+          Fullstack & mobile engineer focused on building production-ready applications.  
+          Experienced in React, React Native, and backend systems — delivering real features used by real users.
+        </p>
+
+        <div className="flex justify-center gap-4">
+          <a href="mailto:johnjohananmogbolu@gmail.com" className="px-6 py-3 bg-[#79a3f6] text-[#1e2939] rounded-xl flex items-center gap-2">
+            <Mail size={18}/> Contact
+          </a>
+          <a href="https://github.com/jomoCode"><FaGithub size={22}/></a>
+          <a href="https://www.linkedin.com/in/mogbolu-johnjohanan"><FaLinkedin size={22}/></a>
+        </div>
+      </section>
+
+      {/* Experience + Skills */}
+      <section className="container mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16">
+        <motion.div {...fadeInUp}>
+          <h2 className="text-3xl font-bold mb-10 flex items-center gap-3">
+            <Layers /> Experience
+          </h2>
+          {EXPERIENCE.map((exp, i) => (
+            <div key={i} className="p-6 bg-[#1e2939]/40 rounded-xl mb-4">
+              <h3 className="font-bold">{exp.company}</h3>
+              <p className="text-sm text-[#9cbdff]/60">{exp.role}</p>
+              <span className="text-xs text-[#79a3f6]">{exp.date}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.div {...fadeInUp}>
+          <h2 className="text-3xl font-bold mb-10 flex items-center gap-3">
+            <Sparkles /> Skills
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {SKILLS.map(skill => (
+              <span key={skill} className="px-4 py-2 bg-[#1e2939]/60 rounded-lg text-sm">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="container mx-auto px-6 py-24">
+        <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
+          <Rocket /> Projects
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {PROJECTS.map((proj, i) => (
+            <motion.div key={i} whileHover={{ y: -6 }} className="p-8 bg-[#1e2939]/40 rounded-2xl relative">
+              
+              <div className="mb-4">
+                {proj.tags.includes("React Native") ? <Smartphone /> : <Code2 />}
+              </div>
+
+              <h3 className="text-2xl font-bold mb-4">{proj.title}</h3>
+              <p className="text-[#9cbdff]/70 mb-6">{proj.desc}</p>
+
+              <div className="flex flex-wrap gap-2">
+                {proj.tags.map(tag => (
+                  <span key={tag} className="text-xs bg-[#79a3f6]/10 px-2 py-1">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <a href={proj.link} className="absolute inset-0" target="_blank"/>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="container mx-auto px-6 py-24 text-center">
+        <h2 className="text-4xl font-bold mb-6">Let’s Work Together</h2>
+        <p className="text-[#9cbdff]/70 mb-8">
+          Open to opportunities and collaborations on real-world products.
+        </p>
+
+        <a href="mailto:johnjohananmogbolu@gmail.com" className="px-8 py-4 bg-[#79a3f6] text-[#1e2939] rounded-xl">
+          Get in Touch
+        </a>
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center py-10 text-[#9cbdff]/40">
+        Built by Mogbolu John-Johanan © 2026
+      </footer>
+
     </div>
   );
-};
-export default Home;
+}
