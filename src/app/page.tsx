@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Link from "next/link";
 
 const PROJECTS = [
   {
@@ -68,7 +69,7 @@ export default function Portfolio() {
         <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center text-xs tracking-widest uppercase font-medium">
           <span className="text-[#79a3f6]">M. John-Johanan</span>
           <div className="flex gap-8">
-            <a href="#work" className="hover:text-[#79a3f6] transition-colors">
+            <a href="/projects" className="hover:text-[#79a3f6] transition-colors">
               Work
             </a>
             <a href="#about" className="hover:text-[#79a3f6] transition-colors">
@@ -195,6 +196,16 @@ export default function Portfolio() {
                 </div>
               </motion.div>
             ))}
+          </div>
+          {/* SEE MORE BUTTON */}
+          <div className="mt-20 text-center">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-white/40 hover:text-[#79a3f6] transition"
+            >
+              See More Projects
+              <ArrowUpRight size={16} />
+            </Link>
           </div>
         </section>
 
